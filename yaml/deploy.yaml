@@ -1,0 +1,38 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: nodetest
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5
+  template: # create pods using pod definition in this template
+    metadata:
+      labels:
+        app: nodetest
+    spec:
+      containers:
+      - name: nodetest
+        image: 'acrjdtest.azurecr.io/ts-singapore:latest'    
+        ports:
+        - containerPort: 3000
+      imagePullSecrets:
+        - name: my-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nodetest
+spec:
+  ports: 
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 3000
+  type: LoadBalancer
+  selector:
+    app: nodetest
