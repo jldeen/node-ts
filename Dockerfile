@@ -1,8 +1,12 @@
-FROM node:8.9-alpine
-ENV NODE_ENV production
+FROM node:alpine
+
+# Create app directory
+RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
-COPY ["package.json", "npm-shrinkwrap.json*", "./"]
-RUN npm install --production --silent ../
-COPY . .
+
+# Bundle app source
+COPY . /usr/src/app
+
 EXPOSE 3000
-CMD npm start
+
+CMD [ "npm", "start" ]
