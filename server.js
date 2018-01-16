@@ -3,7 +3,7 @@ const port = process.env.PORT || 3000;
 
 const handler = (req, res) => {
     console.log('Server received request.');
-    res.end('Hello Tech Summit Singapore!');
+    res.end('Hello World!');
 };
 
 const server = http.createServer(handler);
