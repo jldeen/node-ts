@@ -8,5 +8,8 @@
     "start": "node server.js"
   },
   "author": "jessica.deen@microsoft.com",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "figlet": "^1.2.0"
+  }
 }
